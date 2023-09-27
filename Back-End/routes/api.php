@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('Estado',[homeController::class, 'homeEstados']);
 Route::get('Cidade/{coduf}',[homeController::class, 'homeCidades']);
+Route::get('Profissional/{cpf}',[homeController::class, 'homeProfissional']);
+

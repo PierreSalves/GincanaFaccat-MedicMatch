@@ -15,18 +15,29 @@ class homeController extends Controller
             ->orderBy('estnome')
             ->get();
 
-        return response()->json($estados, 200);
+        return response()->json($estados);
     }
 
     function homeCidades($coduf)
     {
-
         $cidades = DB::table('cidade')
             ->select('cidcoduf', 'cidcodibge', 'cidnome')
             ->where('cidcoduf', '=', $coduf)
             ->orderBy('cidnome')
             ->get();
 
-        return  response()->json($cidades);
+        return response()->json($cidades);
+    }
+
+    function homeProfissional($cpf)
+    {
+        $exists = DB::table('pessoa')
+            ->select(DB::raw('count(pescodigo)'))
+            ->where('pesdoccpf', '=', $cpf)
+            ->get();
+
+        if ($exists > 0) {
+            return response('Este Profissional ja possui um cadastro');
+        }
     }
 }
