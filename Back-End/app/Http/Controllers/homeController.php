@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class homeController extends Controller
 {
-    function homeEstados()
+    function getEstados()
     {
         $estados = DB::table('estado')
             ->select('estcodibge', 'estnome')
@@ -18,26 +19,55 @@ class homeController extends Controller
         return response()->json($estados);
     }
 
-    function homeCidades($coduf)
+    function getCidades($id)
     {
         $cidades = DB::table('cidade')
             ->select('cidcoduf', 'cidcodibge', 'cidnome')
-            ->where('cidcoduf', '=', $coduf)
+            ->where('cidcoduf', '=', $id)
             ->orderBy('cidnome')
             ->get();
 
         return response()->json($cidades);
     }
 
-    function homeProfissional($cpf)
+    function getEspecialidade()
+    {
+        $Esp = DB::table('especialidade')
+            ->select('espcodigo', 'espnome', 'espdescricao', 'espsituacao')
+            ->orderBy('espnome')
+            ->get();
+
+        return response()->json($Esp);
+    }
+
+    function getServico($id)
+    {
+        $estados = DB::table('servico')
+            ->select('servcodigo', 'servnome', 'servdescricao', 'servsituacao')
+            ->where('servespcodigofk', '=', $id)
+            ->orderBy('servnome')
+            ->get();
+
+        return response()->json($estados);
+    }
+
+    function submitFormProfissional()
+    {
+
+    }
+
+    function verificarProfissional($cpf)
     {
         $exists = DB::table('pessoa')
-            ->select(DB::raw('count(pescodigo)'))
+            ->select(DB::raw('count(pescodigo) as count'))
             ->where('pesdoccpf', '=', $cpf)
             ->get();
 
-        if ($exists > 0) {
+        if (intval(data_get($exists, '0.count')) > 0) {
+
             return response('Este Profissional ja possui um cadastro');
         }
+
+        return response('Não Existe');
     }
 }
