@@ -23,29 +23,7 @@ class ProfissionalController extends Controller
         return response()->json($profissionais);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $cpf = $request->input('pesdoccpf');
-
-        $verificacao = $this->verificarProfissional($cpf);
-
-        if ($verificacao->getStatusCode() == 200) {
-
-            $pessoa = Pessoa::create($request);
-
-            Profissional::create($request->all());
-
-            return response()->json('Profissional Criado');
-        } else {
-
-            return $verificacao;
-        }
-    }
-
-    protected function verificarProfissional($cpf)
+    public function verificarProfissional($cpf)
     {
         $exists = DB::table('pessoa')
             ->select(DB::raw('count(pescodigo) as count'))
@@ -63,7 +41,7 @@ class ProfissionalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(string $id)
     {
 
         $profissionais = Pessoa::with('profissao.especialidade.servico')->find($id);

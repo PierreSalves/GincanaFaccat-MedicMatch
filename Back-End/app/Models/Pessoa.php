@@ -9,6 +9,8 @@ class Pessoa extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'pessoa';
     protected $primaryKey = 'pescodigo';
 
@@ -36,5 +38,15 @@ class Pessoa extends Model
     public function profissao()
     {
         return $this->hasMany(Profissional::class, 'propescodigofk', 'pescodigo');
+    }
+
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class, 'cidcodibge', 'pesendcidcod');
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'propescodigofk', 'pesendestcod');
     }
 }

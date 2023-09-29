@@ -25,12 +25,12 @@ Route::get('Estado',[homeController::class, 'getEstados']);
 Route::get('Cidade/{id}',[homeController::class, 'getCidades']);
 Route::get('Especialidade',[homeController::class, 'getEspecialidade']);
 Route::get('Servico/{id}',[homeController::class, 'getServico']);
+Route::get('Servico',[homeController::class, 'getAllServico']);
 
 Route::get('Profissional/{id}',[ProfissionalController::class, 'show']);
+
 Route::post('Profissional/create',[PessoaProfissionalController::class, 'store']);
+
 Route::post('Profissional',[ProfissionalController::class, 'update']);
-Route::get('GuiaMedico/',[guiaController::class, 'search']);
-
-
-// Route::apiResource('Profissional',ProfissionalController::class);
-
+Route::get('GuiaMedico',[guiaController::class, 'searchAll']);
+Route::get('GuiaMedico/Pesquisa',[guiaController::class, 'search']);

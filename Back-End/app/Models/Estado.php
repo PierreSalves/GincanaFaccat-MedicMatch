@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servico extends Model
+class Estado extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    protected $table = 'servico';
-    protected $primaryKey = 'servcodigo';
-
+    protected $table = 'estado';
+    protected $primaryKey = 'estcodibge';
 }

@@ -9,6 +9,8 @@ class ServicoXProfissional extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'servicoXprofissional';
     protected $primaryKey = 'id';
 

@@ -9,6 +9,8 @@ class Profissional extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'profissional';
     protected $primaryKey = 'procodigo';
 

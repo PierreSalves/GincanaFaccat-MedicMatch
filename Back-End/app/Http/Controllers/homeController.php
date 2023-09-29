@@ -52,4 +52,15 @@ class homeController extends Controller
 
         return response()->json($servico);
     }
+
+    function getAllServico()
+    {
+
+        $servico = DB::table('servico')
+            ->select('servcodigo', 'servnome', 'servdescricao', 'servsituacao')
+            ->orderBy('servnome')
+            ->get();
+
+        return response()->json($servico);
+    }
 }

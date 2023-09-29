@@ -9,6 +9,8 @@ class Especialidade extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'especialidade';
     protected $primaryKey = 'espcodigo';
 
