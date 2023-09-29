@@ -12,11 +12,19 @@ class Profissional extends Model
     protected $table = 'profissional';
     protected $primaryKey = 'procodigo';
 
-    public function pessoa() {
+    protected $fillable = [
+        'propescodigofk',
+        'proespcodigofk',
+        'prosituacao'
+    ];
+
+    public function pessoa()
+    {
         return $this->belongsTo(Pessoa::class, 'propescodigofk', 'pescodigo');
     }
 
-    public function especialidade() {
+    public function especialidade()
+    {
         return $this->belongsTo(Especialidade::class, 'proespcodigofk', 'espcodigo');
     }
 }

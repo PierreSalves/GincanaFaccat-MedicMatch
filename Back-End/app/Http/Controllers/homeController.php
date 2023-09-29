@@ -42,32 +42,14 @@ class homeController extends Controller
 
     function getServico($id)
     {
-        $estados = DB::table('servico')
+        $id = explode(',', $id);
+
+        $servico = DB::table('servico')
             ->select('servcodigo', 'servnome', 'servdescricao', 'servsituacao')
-            ->where('servespcodigofk', '=', $id)
+            ->whereIn('servespcodigofk', $id)
             ->orderBy('servnome')
             ->get();
 
-        return response()->json($estados);
-    }
-
-    function submitFormProfissional()
-    {
-
-    }
-
-    function verificarProfissional($cpf)
-    {
-        $exists = DB::table('pessoa')
-            ->select(DB::raw('count(pescodigo) as count'))
-            ->where('pesdoccpf', '=', $cpf)
-            ->get();
-
-        if (intval(data_get($exists, '0.count')) > 0) {
-
-            return response('Este Profissional ja possui um cadastro');
-        }
-
-        return response('Não Existe');
+        return response()->json($servico);
     }
 }

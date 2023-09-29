@@ -34,7 +34,10 @@ class ProfissionalController extends Controller
 
         if ($verificacao->getStatusCode() == 200) {
 
+            $pessoa = Pessoa::create($request);
+
             Profissional::create($request->all());
+
             return response()->json('Profissional Criado');
         } else {
 

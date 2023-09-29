@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfissionalController;
+use App\Http\Controllers\PessoaProfissionalController;
+use App\Http\Controllers\guiaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,8 +27,9 @@ Route::get('Especialidade',[homeController::class, 'getEspecialidade']);
 Route::get('Servico/{id}',[homeController::class, 'getServico']);
 
 Route::get('Profissional/{id}',[ProfissionalController::class, 'show']);
+Route::post('Profissional/create',[PessoaProfissionalController::class, 'store']);
 Route::post('Profissional',[ProfissionalController::class, 'update']);
-// Route::post('Profissional/{id}/{situacao}',[ProfissionalController::class, 'update']);
+Route::get('GuiaMedico/',[guiaController::class, 'search']);
 
 
 // Route::apiResource('Profissional',ProfissionalController::class);
